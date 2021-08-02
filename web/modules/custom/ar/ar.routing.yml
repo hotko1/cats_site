@@ -1,0 +1,6 @@
+ar.artext:
+  path: '/ar/cats'
+  defaults:
+    _controller: '\Drupal\ar\Controller\ArController::arText'
+  requirements:
+    _permission: 'access content'
