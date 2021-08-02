@@ -2,6 +2,9 @@ framework:
   css:
     theme:
       css/style.css: {}
+    component:
+      css/basic.css: {}
+      css/form.css: {}
 
 # Uncomment for LESS source JavaScript files.
 #  js:

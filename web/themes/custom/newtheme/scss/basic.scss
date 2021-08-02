@@ -1,0 +1,15 @@
+@import "reset";
+@import "mixins";
+.navbar{
+  &.navbar-default{
+    background-color: #99cc33;
+    border: none;
+  }
+  .navbar-collapse{
+    .region-navigation-collapsible{
+      .logo.navbar-btn{
+        display: none;
+      }
+    }
+  }
+}

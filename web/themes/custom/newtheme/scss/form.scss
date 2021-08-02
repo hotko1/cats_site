@@ -1,0 +1,16 @@
+@import "reset";
+@import "mixins";
+.main-container{
+  .row{
+    .col-sm-12{
+      .region-content{
+        padding: 20px;
+        background: #66ccff;
+        p{
+          @include fontz(20px,22px,600,normal,#ffffff);
+          text-align: center;
+        }
+      }
+    }
+  }
+}
