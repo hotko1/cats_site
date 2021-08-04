@@ -28,6 +28,10 @@ class ArForm extends FormBase
         $form['rival_1']=[
         '#type' => 'textfield',
         '#title' => $this->t('Your cat’s name:'),
+        '#required' => true,
+        '#attributes' => array(
+            'placeholder' => $this->t('The length of the name is 2-32 letters.'),
+        ),
         ];
 
         $form['submit'] = [
