@@ -48,13 +48,23 @@ a {
   padding: 20px;
   background: #66ccff;
 }
-.main-container .row .col-sm-12 .region-content p {
+.main-container .row .col-sm-12 .region-content .page-header {
   font-size: 20px;
   line-height: 22px;
   font-weight: 600;
   letter-spacing: normal;
   color: #ffffff;
   text-align: center;
+}
+.main-container .row .col-sm-12 .region-content .ar-arform .form-group .control-label {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+.main-container .row .col-sm-12 .region-content .ar-arform .form-group input {
+  margin-top: 15px;
 }
 
 /*# sourceMappingURL=form.css.map */

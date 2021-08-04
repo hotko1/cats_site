@@ -6,10 +6,20 @@
       .region-content{
         padding: 20px;
         background: #66ccff;
-        //p{
-        //  @include fontz(20px,22px,600,normal,#ffffff);
-        //  text-align: center;
-        //}
+        .page-header{
+            @include fontz(20px,22px,600,normal,#ffffff);
+            text-align: center;
+        }
+        .ar-arform{
+          .form-group{
+            .control-label{
+              @include fontz(20px,22px,600,normal,#ffffff);
+            }
+            input{
+              margin-top: 15px;
+            }
+          }
+        }
       }
     }
   }
