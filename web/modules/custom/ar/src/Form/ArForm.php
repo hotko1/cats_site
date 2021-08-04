@@ -25,7 +25,7 @@ class ArForm extends FormBase
     public function buildForm(array $form, FormStateInterface $form_state)
     {
 
-        $form['rival_1']=[
+        $form['name']=[
         '#type' => 'textfield',
         '#title' => $this->t('Your cat’s name:'),
         '#required' => true,
@@ -45,9 +45,22 @@ class ArForm extends FormBase
   /**
    * {@inheritdoc}
    */
+    public function validateForm(array &$form, FormStateInterface $form_state)
+    {
+        if (strlen($form_state->getValue('name')) < 2) {
+            $form_state->setErrorByName('name', $this->t('Cat name is too short. Please enter a full cat name.'));
+        }
+        if (strlen($form_state->getValue('name')) > 32) {
+            $form_state->setErrorByName('name', $this->t('Cat name is too long. Please enter a really cat name.'));
+        }
+    }
+
+  /**
+   * {@inheritdoc}
+   */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
 
-        \Drupal::messenger()->addMessage($this->t("Your cat's name is: " . $form_state->getValue('rival_1')));
+        \Drupal::messenger()->addMessage($this->t("Your cat name is: " . $form_state->getValue('name')));
     }
 }
