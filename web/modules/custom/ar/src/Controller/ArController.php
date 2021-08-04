@@ -2,24 +2,28 @@
 
 namespace Drupal\ar\Controller;
 
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Controller\ControllerBase;
+
 /**
  * This is our ar controller
  */
-class ArController{
+class ArController
+{
 
-  public function arText(){
-    $cats = [
-      'Hello! You can add here a photo of your cat.'
-    ];
+    public function arText()
+    {
 
-    $ourAres = '';
-    foreach ($cats as $ar){
-      $ourAres .= '<p>' . $ar . '</p>';
+        return[
+        '#markup' => 'Hello! You can add here a photo of your cat.'
+        ];
     }
 
-    return[
-      '#type' => 'markup',
-      '#markup' =>  $ourAres,
-    ];
-  }
+    public function content()
+    {
+        $simpleform = \Drupal::formBuilder()
+        ->getForm('\Drupal\ar\Form\ArForm');
+
+        return $simpleform;
+    }
 }

@@ -48,7 +48,7 @@ a {
   background-color: #99cc33;
   border: none;
 }
-.navbar .navbar-collapse .region-navigation-collapsible .logo.navbar-btn {
+.navbar.navbar-default .navbar-header .region-navigation .logo.navbar-btn {
   display: none;
 }
 

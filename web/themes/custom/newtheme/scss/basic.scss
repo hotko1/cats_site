@@ -4,11 +4,11 @@
   &.navbar-default{
     background-color: #99cc33;
     border: none;
-  }
-  .navbar-collapse{
-    .region-navigation-collapsible{
-      .logo.navbar-btn{
-        display: none;
+    .navbar-header{
+      .region-navigation{
+        .logo.navbar-btn{
+          display: none;
+        }
       }
     }
   }

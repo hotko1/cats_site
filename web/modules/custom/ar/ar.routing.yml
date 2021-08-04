@@ -1,6 +1,7 @@
 ar.artext:
   path: '/ar/cats'
   defaults:
-    _controller: '\Drupal\ar\Controller\ArController::arText'
+    _title: 'Hello! You can add here a photo of your cat.'
+    _controller: '\Drupal\ar\Controller\ArController::Content'
   requirements:
     _permission: 'access content'
