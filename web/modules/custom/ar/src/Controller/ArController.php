@@ -11,14 +11,6 @@ use Drupal\Core\Controller\ControllerBase;
 class ArController
 {
 
-    public function arText()
-    {
-
-        return[
-        '#markup' => 'Hello! You can add here a photo of your cat.'
-        ];
-    }
-
     public function content()
     {
         $simpleform = \Drupal::formBuilder()
