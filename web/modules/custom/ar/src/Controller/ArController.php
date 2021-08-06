@@ -6,16 +6,15 @@ use Drupal\Core\Render\Markup;
 use Drupal\Core\Controller\ControllerBase;
 
 /**
- * This is our ar controller
+ * This is our ar controller.
  */
-class ArController
-{
+class ArController extends ControllerBase {
 
-    public function content()
-    {
-        $simpleform = \Drupal::formBuilder()
-        ->getForm('\Drupal\ar\Form\ArForm');
+  public function content() {
+    $simpleform = \Drupal::formBuilder()
+      ->getForm('\Drupal\ar\Form\ArForm');
 
-        return $simpleform;
-    }
+    return $simpleform;
+  }
+
 }

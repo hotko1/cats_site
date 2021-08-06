@@ -15,9 +15,9 @@
             .control-label{
               @include fontz(20px,22px,600,normal,#ffffff);
             }
-            input{
-              margin-top: 15px;
-            }
+          }
+          .form-submit{
+            margin-top: 15px;
           }
         }
       }

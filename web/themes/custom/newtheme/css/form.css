@@ -63,7 +63,17 @@ a {
   letter-spacing: normal;
   color: #ffffff;
 }
-.main-container .row .col-sm-12 .region-content .ar-arform .form-group input {
+.main-container .row .col-sm-12 .region-content .ar-arform .form-group .input-group {
+  display: block;
+  margin-top: 15px;
+}
+.main-container .row .col-sm-12 .region-content .ar-arform .form-group .input-group input {
+  width: 100%;
+}
+.main-container .row .col-sm-12 .region-content .ar-arform .form-group .input-group .input-group-addon {
+  display: none;
+}
+.main-container .row .col-sm-12 .region-content .ar-arform .form-submit {
   margin-top: 15px;
 }
 
