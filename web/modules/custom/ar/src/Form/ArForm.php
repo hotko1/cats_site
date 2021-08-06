@@ -59,7 +59,7 @@ class ArForm extends FormBase {
       $response->addCommand(
         new HtmlCommand(
           '.result_message',
-          'Cat name is too short. Please enter a full cat name.'
+          '<div class="novalid">Cat name is too short. Please enter a full cat name.</div>'
         )
       );
     }
@@ -67,7 +67,7 @@ class ArForm extends FormBase {
       $response->addCommand(
         new HtmlCommand(
           '.result_message',
-          'Cat name is too long. Please enter a really cat name.'
+          '<div class="novalid">Cat name is too long. Please enter a really cat name.</div>'
         )
       );
     }
@@ -75,7 +75,7 @@ class ArForm extends FormBase {
       $response->addCommand(
         new HtmlCommand(
           '.result_message',
-          'Your cat name is: ' . $form_state->getValue('name')
+          '<div class="valid">Your cat name is: ' . $form_state->getValue('name')
         )
       );
     }
