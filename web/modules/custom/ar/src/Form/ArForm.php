@@ -38,6 +38,15 @@ class ArForm extends FormBase {
       ],
     ];
 
+    $form['email'] = [
+      '#type' => 'email',
+      '#title' => $this->t('Your email:'),
+      '#required' => TRUE,
+      '#attributes' => [
+        'placeholder' => $this->t('Only Latin letters, "_" and "-".'),
+      ],
+    ];
+
     $form['submit'] = [
       '#type' => 'button',
       '#value' => $this->t('Add cat'),
