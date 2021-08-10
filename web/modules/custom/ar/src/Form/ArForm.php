@@ -38,12 +38,21 @@ class ArForm extends FormBase {
       ],
     ];
 
-    $form['email'] = [
-      '#type' => 'email',
+    $form['email_message'] = [
+      '#type' => 'markup',
+      '#markup' => '<div class="email-result_message"></div>',
+    ];
+
+    $form['email_user'] = [
+      '#type' => 'textfield',
       '#title' => $this->t('Your email:'),
       '#required' => TRUE,
       '#attributes' => [
         'placeholder' => $this->t('Only Latin letters, "_" and "-".'),
+      ],
+      '#ajax' => [
+        'callback' => '::mailValidateCallback',
+        'event' => 'keyup',
       ],
     ];
 
@@ -59,34 +68,69 @@ class ArForm extends FormBase {
   }
 
   /**
-   * Our custom ajax response.
+   * {@inheritdoc}
    */
-  public function setMessage(array &$form, FormStateInterface $form_state) {
+  public function mailValidateCallback(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
-    $a = strlen($form_state->getValue('name'));
-    if ($a < 2) {
+    if (!preg_match('/^[a-z._@-]{0,100}$/', $form_state->getValue('email_user'))) {
       $response->addCommand(
         new HtmlCommand(
-          '.result_message',
-          '<div class="novalid">Cat name is too short. Please enter a full cat name.</div>'
-        )
-      );
-    }
-    elseif (32 < $a) {
-      $response->addCommand(
-        new HtmlCommand(
-          '.result_message',
-          '<div class="novalid">Cat name is too long. Please enter a really cat name.</div>'
+          '.email-result_message',
+          '<div class="novalid">Invalid mail.</div>'
         )
       );
     }
     else {
       $response->addCommand(
         new HtmlCommand(
-          '.result_message',
-          '<div class="valid">Your cat name is: ' . $form_state->getValue('name')
+          '.email-result_message',
+          NULL
         )
       );
+    }
+
+    return $response;
+  }
+
+  /**
+   * Our custom ajax response.
+   */
+  public function setMessage(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+    $a = strlen($form_state->getValue('name'));
+    if (!preg_match('/^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/', $form_state->getValue('email_user'))) {
+      $response->addCommand(
+        new HtmlCommand(
+          '.email-result_message',
+          '<div class="novalid">Invalid mail.</div>'
+        )
+      );
+    }
+    else {
+      if ($a < 2) {
+        $response->addCommand(
+          new HtmlCommand(
+            '.result_message',
+            '<div class="novalid">Cat name is too short. Please enter a full cat name.</div>'
+          )
+        );
+      }
+      elseif (32 < $a) {
+        $response->addCommand(
+          new HtmlCommand(
+            '.result_message',
+            '<div class="novalid">Cat name is too long. Please enter a really cat name.</div>'
+          )
+        );
+      }
+      else {
+        $response->addCommand(
+          new HtmlCommand(
+            '.result_message',
+            '<div class="valid">Your cat name is: ' . $form_state->getValue('name')
+          )
+        );
+      }
     }
 
     return $response;

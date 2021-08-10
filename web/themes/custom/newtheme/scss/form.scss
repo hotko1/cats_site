@@ -3,6 +3,15 @@
 .main-container{
   .row{
     .col-sm-12{
+      .highlighted{
+        .region-highlighted{
+          div{
+            .messages__wrapper{
+              display: none;
+            }
+          }
+        }
+      }
       .region-content{
         padding: 20px;
         background: #66ccff;
@@ -11,7 +20,7 @@
             text-align: center;
         }
         .ar-form{
-          .result_message{
+          .result_message, .email-result_message{
             margin-bottom: 15px;
             text-align: center;
             .valid{
@@ -27,6 +36,12 @@
             .control-label{
               margin-bottom: 15px;
               @include fontz(20px,22px,600,normal,#ffffff);
+            }
+            .input-group{
+              display: block;
+              .input-group-addon{
+                display: none;
+              }
             }
           }
           .form-submit{
