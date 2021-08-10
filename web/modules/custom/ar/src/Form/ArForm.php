@@ -56,6 +56,14 @@ class ArForm extends FormBase {
       ],
     ];
 
+    $form['image'] = [
+      '#type' => 'managed_file',
+      '#title' => $this->t('Download image'),
+      '#size' => 2,
+      '#description' => $this->t('Image should be less than 2 MB and in JPEG, JPG or PNG format.'),
+      '#upload_location' => 'public://',
+    ];
+
     $form['submit'] = [
       '#type' => 'button',
       '#value' => $this->t('Add cat'),
