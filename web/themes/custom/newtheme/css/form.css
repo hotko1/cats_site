@@ -93,6 +93,18 @@ a {
 .main-container .row .col-sm-12 .region-content .ar-form .form-group .input-group .input-group-addon {
   display: none;
 }
+.main-container .row .col-sm-12 .region-content .ar-form .form-group .form-type-managed-file .control-label {
+  margin-top: 15px;
+}
+.main-container .row .col-sm-12 .region-content .ar-form .form-group .form-type-managed-file .form-managed-file {
+  margin-top: 0;
+}
+.main-container .row .col-sm-12 .region-content .ar-form div .form-group div {
+  margin-top: 45px;
+}
+.main-container .row .col-sm-12 .region-content .ar-form div .form-group .form-group {
+  margin-top: 0;
+}
 .main-container .row .col-sm-12 .region-content .ar-form .form-submit {
   margin-top: 15px;
 }

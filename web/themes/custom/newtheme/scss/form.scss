@@ -43,6 +43,24 @@
                 display: none;
               }
             }
+            .form-type-managed-file{
+              .control-label{
+                margin-top: 15px;
+              }
+              .form-managed-file{
+                margin-top: 0;
+              }
+            }
+          }
+          div{
+            .form-group{
+              div{
+                margin-top: 45px;
+              }
+              .form-group{
+                margin-top: 0;
+              }
+            }
           }
           .form-submit{
             margin-top: 15px;
