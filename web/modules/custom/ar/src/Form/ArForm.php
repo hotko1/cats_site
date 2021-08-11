@@ -109,7 +109,7 @@ class ArForm extends FormBase {
    */
   public function setMessage(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
-    $a = strlen($form_state->getValue('name'));
+    $cat_name = strlen($form_state->getValue('name'));
     if (!preg_match('/^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/', $form_state->getValue('email_user'))) {
       $response->addCommand(
         new HtmlCommand(
@@ -118,31 +118,29 @@ class ArForm extends FormBase {
         )
       );
     }
+    elseif ($cat_name < 2) {
+      $response->addCommand(
+        new HtmlCommand(
+          '.result_message',
+          '<div class="novalid">' . $this->t('Cat name is too short. Please enter a full cat name.')
+        )
+      );
+    }
+    elseif (32 < $cat_name) {
+      $response->addCommand(
+        new HtmlCommand(
+          '.result_message',
+          '<div class="novalid">' . $this->t('Cat name is too long. Please enter a really cat name.')
+        )
+      );
+    }
     else {
-      if ($a < 2) {
-        $response->addCommand(
-          new HtmlCommand(
-            '.result_message',
-            '<div class="novalid">' . $this->t('Cat name is too short. Please enter a full cat name.')
-          )
-        );
-      }
-      elseif (32 < $a) {
-        $response->addCommand(
-          new HtmlCommand(
-            '.result_message',
-            '<div class="novalid">' . $this->t('Cat name is too long. Please enter a really cat name.')
-          )
-        );
-      }
-      else {
-        $response->addCommand(
-          new HtmlCommand(
-            '.result_message',
-            '<div class="valid">' . $this->t('Your cat name is:&nbsp;') . $form_state->getValue('name')
-          )
-        );
-      }
+      $response->addCommand(
+        new HtmlCommand(
+          '.result_message',
+          '<div class="valid">' . $this->t('Your cat name is:&nbsp;') . $form_state->getValue('name')
+        )
+      );
     }
 
     return $response;
