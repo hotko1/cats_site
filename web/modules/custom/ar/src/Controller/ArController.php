@@ -10,6 +10,9 @@ use Drupal\Core\Controller\ControllerBase;
  */
 class ArController extends ControllerBase {
 
+  /**
+   * {@inheritdoc}
+   */
   public function content() {
     $simpleform = \Drupal::formBuilder()
       ->getForm('\Drupal\ar\Form\ArForm');
