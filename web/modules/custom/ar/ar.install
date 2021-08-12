@@ -34,7 +34,7 @@ function ar_schema() {
         'not null' => TRUE,
         'default' => 0,
       ],
-      'date' => [
+      'time' => [
         'type' => 'int',
         'length' => 255,
         'not null' => TRUE,

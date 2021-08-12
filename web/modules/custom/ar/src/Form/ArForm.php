@@ -6,6 +6,12 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\RedirectCommand;
+use Drupal\Core\TypedData\Type\DateTimeInterface;
+use Drupal\file\Entity\File;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Our custom ajax form.
@@ -65,7 +71,7 @@ class ArForm extends FormBase {
         'file_validate_extensions' => ['png jpg jpeg'],
         'file_validate_size' => [2097152],
       ],
-      '#upload_location' => 'public://',
+      '#upload_location' => 'public://images',
     ];
 
     $form['submit'] = [
@@ -73,6 +79,7 @@ class ArForm extends FormBase {
       '#value' => $this->t('Add cat'),
       '#ajax' => [
         'callback' => '::setMessage',
+        'event' => 'click',
       ],
     ];
 
@@ -141,6 +148,41 @@ class ArForm extends FormBase {
           '<div class="valid">' . $this->t('Your cat name is:&nbsp;') . $form_state->getValue('name')
         )
       );
+
+      $image = $form_state->getValue('image');
+      $time = $form_state->getValue('time');
+      $data = [
+        'id' => $form_state->getValue('id'),
+        'name' => $form_state->getValue('name'),
+        'email_user' => $form_state->getValue('email_user'),
+        'image' => $image[0],
+        'time' => $time[0],
+      ];
+
+      $file = File::load($image[0]);
+      $file->setPermanent();
+      $file->save();
+
+//      $time = \DateTime::createFromFormat('Y-m-d', '2000-01-30');
+//      $newDateString = $time->format('Y-m-d\TH:i:s');
+//      $nodeTime = \Drupal\node\Entity\Node::create([
+//        'type' => 'article',
+//        'title' => 'The title',
+//        'langcode' => 'en',
+//        'uid' => 1,
+//        'status' => 1,
+//        'body' => ['The body text'],
+//        'field_date' => $newDateString,
+//      ]
+//      );
+//      $nodeTime->save();
+
+      \Drupal::database()->insert('ar')->fields($data)->execute();
+
+//      \Drupal::messenger()->addStatus('Succesfully saved');
+//      $url = new Url('ar.artext');
+//      $data_response = new RedirectResponse($url->toString());
+//      $data_response->send();
     }
 
     return $response;
