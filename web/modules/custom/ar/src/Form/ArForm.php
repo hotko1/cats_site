@@ -150,39 +150,22 @@ class ArForm extends FormBase {
       );
 
       $image = $form_state->getValue('image');
-      $time = $form_state->getValue('time');
+      $time = \Drupal::time()->getCurrentTime();
+      date_default_timezone_set('UTC');
       $data = [
         'id' => $form_state->getValue('id'),
         'name' => $form_state->getValue('name'),
         'email_user' => $form_state->getValue('email_user'),
         'image' => $image[0],
-        'time' => $time[0],
+        'time' => $time,
       ];
 
       $file = File::load($image[0]);
       $file->setPermanent();
       $file->save();
 
-//      $time = \DateTime::createFromFormat('Y-m-d', '2000-01-30');
-//      $newDateString = $time->format('Y-m-d\TH:i:s');
-//      $nodeTime = \Drupal\node\Entity\Node::create([
-//        'type' => 'article',
-//        'title' => 'The title',
-//        'langcode' => 'en',
-//        'uid' => 1,
-//        'status' => 1,
-//        'body' => ['The body text'],
-//        'field_date' => $newDateString,
-//      ]
-//      );
-//      $nodeTime->save();
-
       \Drupal::database()->insert('ar')->fields($data)->execute();
 
-//      \Drupal::messenger()->addStatus('Succesfully saved');
-//      $url = new Url('ar.artext');
-//      $data_response = new RedirectResponse($url->toString());
-//      $data_response->send();
     }
 
     return $response;
