@@ -26,68 +26,32 @@ class ArBlock extends BlockBase {
 
     $rows = [];
 
-    foreach ($result as $rows => $content) {
+    foreach ($result as $data) {
+      $timestamp = $data->time;
+      $timeout = gmdate("Y-m-d H:i:s", $timestamp);
       $rows[] = [
-        'data' => [
-          $content->id,
-          $content->name,
-          $content->email_user,
-          $content->image,
-          $content->time,
-        ],
+        'id' => $data->id,
+        'name' => $data->name,
+        'email_user' => $data->email_user,
+        'image' => $data->image,
+        'time' => $timeout,
       ];
     }
 
-    $header = ['id', 'name', 'email_user', 'image', 'time'];
+    $header = [
+      'id' => $this->t('ID'),
+      'name' => $this->t('Name'),
+      'email_user' => $this->t('Email user'),
+      'image' => $this->t('Image'),
+      'time' => $this->t('Time'),
+    ];
     $output = [
-      '#theme' => 'table',
+      '#type' => 'table',
       '#header' => $header,
       '#rows' => $rows,
     ];
 
     return $output;
-
-//    $cats = [
-//      [
-//        'name_cat' => 'name',
-//        'email' => 'email_user',
-//        'image_cat' => 'image',
-//        'current_time' => 'time',
-//      ],
-//    ];
-
-//    $table = [
-//      '#type' => 'table',
-//      '#header' => [
-//        $this->t('Cat name'),
-//        $this->t('User email'),
-//        $this->t('Photo'),
-//        $this->t('Time to add an entry.'),
-//      ],
-//    ];
-
-//    foreach ($cats as $cat) {
-//      $table[] = [
-//        'name_cat' => [
-//          '#type' => 'markup',
-//          '#markup' => $cat['name_cat'],
-//        ],
-//        'email' => [
-//          '#type' => 'markup',
-//          '#markup' => $cat['email'],
-//        ],
-//        'image_cat' => [
-//          '#type' => 'markup',
-//          '#markup' => $cat['image_cat'],
-//        ],
-//        'current_time' => [
-//          '#type' => 'markup',
-//          '#markup' => $cat['current_time'],
-//        ],
-//      ];
-//    }
-
-//    return $table;
   }
 
 }

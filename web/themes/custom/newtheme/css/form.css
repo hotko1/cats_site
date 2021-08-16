@@ -44,9 +44,6 @@ a {
   text-decoration: none;
 }
 
-.main-container .row .col-sm-12 .highlighted .region-highlighted div .messages__wrapper {
-  display: none;
-}
 .main-container .row .col-sm-12 .region-content {
   padding: 20px;
   background: #66ccff;
