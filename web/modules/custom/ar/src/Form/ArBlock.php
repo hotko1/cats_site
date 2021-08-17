@@ -2,18 +2,12 @@
 
 namespace Drupal\ar\Form;
 
-use Drupal\Core\Block\BlockBase;
-use mysql_xdevapi\Table;
+use Drupal\Core\Database\Database;
 
 /**
  * Provides a block called "Example ar block".
- *
- * @Block(
- *   id = "ar_cat",
- *   admin_label = @Translation ("Example ar block")
- * )
  */
-class ArBlock extends BlockBase {
+class ArBlock extends Database {
 
   /**
    * {@inheritdoc}
@@ -29,8 +23,12 @@ class ArBlock extends BlockBase {
     foreach ($result as $data) {
       $timestamp = $data->time;
       $timeout = gmdate("Y-m-d H:i:s", $timestamp);
+//      $img = theme_image('image', [
+//        'path' => 'public://images',
+//      ]);
+//      $img = '<img src"' . $this->configuration['image']['value'] . '">';
       $rows[] = [
-        'id' => $data->id,
+//        'id' => $data->id,
         'name' => $data->name,
         'email_user' => $data->email_user,
         'image' => $data->image,
@@ -39,11 +37,11 @@ class ArBlock extends BlockBase {
     }
 
     $header = [
-      'id' => $this->t('ID'),
-      'name' => $this->t('Name'),
-      'email_user' => $this->t('Email user'),
-      'image' => $this->t('Image'),
-      'time' => $this->t('Time'),
+//      'id' => 'ID',
+      'name' => 'Name',
+      'email_user' => 'Email user',
+      'image' => 'Image',
+      'time' => 'Time',
     ];
     $output = [
       '#type' => 'table',
