@@ -24,7 +24,7 @@ class ArBlock extends Database {
 
     foreach ($result as $data) {
       $timestamp = $data->time;
-      $timeout = gmdate("Y-m-d H:i:s", $timestamp);
+      $timeout = date("d/m/Y H:i:s", $timestamp);
 
       $file = File::load($data->fid);
       $image = $file->createFileUrl();
