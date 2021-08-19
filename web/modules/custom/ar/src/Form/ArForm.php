@@ -146,7 +146,6 @@ class ArForm extends FormBase {
 
       $image = $form_state->getValue('fid');
       $time = \Drupal::time()->getCurrentTime();
-//      date_default_timezone_set('UTC');
       $data = [
         'id' => $form_state->getValue('id'),
         'name' => $form_state->getValue('name'),

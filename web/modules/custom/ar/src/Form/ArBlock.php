@@ -43,10 +43,10 @@ class ArBlock extends Database {
     $revers = array_reverse($rows);
 
     $header = [
-      'name' => 'Name',
-      'email_user' => 'Email user',
-      'fid' => 'Image',
-      'time' => 'Time',
+      'name' => t('Name'),
+      'email_user' => t('Email user'),
+      'fid' => t('Image'),
+      'time' => t('Time'),
     ];
     $output = [
       '#type' => 'table',
