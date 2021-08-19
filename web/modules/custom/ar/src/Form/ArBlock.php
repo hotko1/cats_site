@@ -3,6 +3,8 @@
 namespace Drupal\ar\Form;
 
 use Drupal\Core\Database\Database;
+use Drupal\Core\Render\Markup;
+use Drupal\file\Entity\File;
 
 /**
  * Provides a block called "Example ar block".
@@ -15,7 +17,7 @@ class ArBlock extends Database {
   public function build() {
 
     $result = \Drupal::database()->select('ar', 'n')
-      ->fields('n', ['id', 'name', 'email_user', 'image', 'time'])
+      ->fields('n', ['id', 'name', 'email_user', 'fid', 'time'])
       ->execute()->fetchAllAssoc('id');
 
     $rows = [];
@@ -23,30 +25,33 @@ class ArBlock extends Database {
     foreach ($result as $data) {
       $timestamp = $data->time;
       $timeout = gmdate("Y-m-d H:i:s", $timestamp);
-//      $img = theme_image('image', [
-//        'path' => 'public://images',
-//      ]);
-//      $img = '<img src"' . $this->configuration['image']['value'] . '">';
+
+      $file = File::load($data->fid);
+      $image = $file->createFileUrl();
+      $img = '<img src="' . $image . '" width=400 alt="Cat photo" />';
+      $render_image = render($img);
+      $image_markup = Markup::create($render_image);
+
       $rows[] = [
-//        'id' => $data->id,
         'name' => $data->name,
         'email_user' => $data->email_user,
-        'image' => $data->image,
+        'fid' => $image_markup,
         'time' => $timeout,
       ];
     }
 
+    $revers = array_reverse($rows);
+
     $header = [
-//      'id' => 'ID',
       'name' => 'Name',
       'email_user' => 'Email user',
-      'image' => 'Image',
+      'fid' => 'Image',
       'time' => 'Time',
     ];
     $output = [
       '#type' => 'table',
       '#header' => $header,
-      '#rows' => $rows,
+      '#rows' => $revers,
     ];
 
     return $output;

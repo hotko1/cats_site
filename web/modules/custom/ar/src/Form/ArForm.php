@@ -6,12 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\Core\Ajax\RedirectCommand;
-use Drupal\Core\TypedData\Type\DateTimeInterface;
 use Drupal\file\Entity\File;
-use Drupal\Core\Url;
-use Drupal\node\Entity\Node;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Our custom ajax form.
@@ -62,7 +57,7 @@ class ArForm extends FormBase {
       ],
     ];
 
-    $form['image'] = [
+    $form['fid'] = [
       '#type' => 'managed_file',
       '#title' => $this->t('Download image'),
       '#required' => TRUE,
@@ -149,14 +144,14 @@ class ArForm extends FormBase {
         )
       );
 
-      $image = $form_state->getValue('image');
+      $image = $form_state->getValue('fid');
       $time = \Drupal::time()->getCurrentTime();
       date_default_timezone_set('UTC');
       $data = [
         'id' => $form_state->getValue('id'),
         'name' => $form_state->getValue('name'),
         'email_user' => $form_state->getValue('email_user'),
-        'image' => $image[0],
+        'fid' => $image[0],
         'time' => $time,
       ];
 

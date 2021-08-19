@@ -28,7 +28,7 @@ function ar_schema() {
         'not null' => TRUE,
         'default' => '',
       ],
-      'image' => [
+      'fid' => [
         'type' => 'int',
         'length' => 255,
         'not null' => TRUE,

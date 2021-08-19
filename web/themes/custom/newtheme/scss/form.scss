@@ -3,15 +3,6 @@
 .main-container{
   .row{
     .col-sm-12{
-      //.highlighted{
-      //  .region-highlighted{
-      //    div{
-      //      .messages__wrapper{
-      //        display: none;
-      //      }
-      //    }
-      //  }
-      //}
       .region-content{
         padding: 20px;
         background: #66ccff;
@@ -39,9 +30,9 @@
             }
             .input-group{
               display: block;
-              //.input-group-addon{
-              //  display: none;
-              //}
+              .input-group-addon{
+                display: none;
+              }
             }
             .form-type-managed-file{
               .control-label{
