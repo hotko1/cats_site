@@ -105,5 +105,16 @@ a {
 .main-container .row .col-sm-12 .region-content .ar-form .form-submit {
   margin-top: 15px;
 }
+.main-container .row .col-sm-12 .region-content .table-responsive .table-hover thead tr th {
+  text-align: center;
+}
+.main-container .row .col-sm-12 .region-content .table-responsive .table-hover tbody tr td {
+  text-align: center;
+  vertical-align: middle;
+}
+.main-container .row .col-sm-12 .region-content .table-responsive .table-hover tbody tr td img {
+  display: block;
+  margin: 0 auto;
+}
 
 /*# sourceMappingURL=form.css.map */
