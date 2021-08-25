@@ -112,9 +112,10 @@ a {
   text-align: center;
   vertical-align: middle;
 }
-.main-container .row .col-sm-12 .region-content .table-responsive .table-hover tbody tr td img {
+.main-container .row .col-sm-12 .region-content .table-responsive .table-hover tbody tr td a {
   display: block;
   margin: 0 auto;
+  max-width: 400px;
 }
 
 /*# sourceMappingURL=form.css.map */

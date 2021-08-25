@@ -3,6 +3,7 @@
 namespace Drupal\ar\Form;
 
 use Drupal\Core\Database\Database;
+use Drupal\Core\Link;
 use Drupal\Core\Render\Markup;
 use Drupal\file\Entity\File;
 
@@ -31,11 +32,26 @@ class ArBlock extends Database {
       $img = '<img src="' . $image . '" width=400 alt="Cat photo" />';
       $render_image = render($img);
       $image_markup = Markup::create($render_image);
+      $link = $_SERVER['SERVER_NAME'];
+      $url = "http://{$link}{$image}";
+      $image_link = '<a href="' . $url . '" target="_blank">' . $image_markup . '</a>';
+      $render_link = render($image_link);
+      $link_markup = Markup::create($render_link);
+
+//      $url = 'http://{$link}{$image}';
+//      $render_url = render($url);
+//      $url_markup = Markup::create($render_url);
+
+//      $link = Link::fromTextAndUrl($image_markup, $url);
+//      $link = $link->toRenderable();
+//      $render_link = render($link);
+
+//      $url = $data->get('fid')->getValue();
 
       $rows[] = [
         'name' => $data->name,
         'email_user' => $data->email_user,
-        'fid' => $image_markup,
+        'fid' => $link_markup,
         'time' => $timeout,
       ];
     }

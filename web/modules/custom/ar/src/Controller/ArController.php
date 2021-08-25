@@ -21,7 +21,20 @@ class ArController extends ControllerBase {
     $tableOut = new ArBlock();
     $tableOutput = $tableOut->build();
 
-    return [$simpleform, $tableOutput];
+    return [
+      '#theme' => 'ar',
+      '#forms' => $simpleform,
+      '#tables' => $tableOutput,
+//      '#items' => $tableOutput,
+//      '#items' => [$simpleform, $tableOutput],
+//      '#items' => [
+//        '#forms' => $simpleform,
+//        '#tables' => $tableOutput,
+//      ],
+      '#title' => 'Hello! You can add here a photo of your cat.',
+    ];
+
+//    return [$simpleform, $tableOutput, $templates];
   }
 
 }
