@@ -2,7 +2,6 @@
 
 namespace Drupal\ar\Controller;
 
-//use Drupal\Core\Render\Markup;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\ar\Form\ArBlock;
 
