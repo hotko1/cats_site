@@ -2,7 +2,7 @@
 
 namespace Drupal\ar\Controller;
 
-use Drupal\Core\Render\Markup;
+//use Drupal\Core\Render\Markup;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\ar\Form\ArBlock;
 
@@ -25,16 +25,8 @@ class ArController extends ControllerBase {
       '#theme' => 'ar',
       '#forms' => $simpleform,
       '#tables' => $tableOutput,
-//      '#items' => $tableOutput,
-//      '#items' => [$simpleform, $tableOutput],
-//      '#items' => [
-//        '#forms' => $simpleform,
-//        '#tables' => $tableOutput,
-//      ],
       '#title' => 'Hello! You can add here a photo of your cat.',
     ];
-
-//    return [$simpleform, $tableOutput, $templates];
   }
 
 }

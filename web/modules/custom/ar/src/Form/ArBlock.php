@@ -29,24 +29,20 @@ class ArBlock extends Database {
 
       $file = File::load($data->fid);
       $image = $file->createFileUrl();
-      $img = '<img src="' . $image . '" width=400 alt="Cat photo" />';
-      $render_image = render($img);
-      $image_markup = Markup::create($render_image);
-      $link = $_SERVER['SERVER_NAME'];
-      $url = "http://{$link}{$image}";
-      $image_link = '<a href="' . $url . '" target="_blank">' . $image_markup . '</a>';
+
+      $domen = $_SERVER['SERVER_NAME'];
+      if (isset($_SERVER['HTTPS'])) {
+        $protocol = 'https:';
+      }
+      else {
+        $protocol = 'http:';
+      }
+      $url = "{$protocol}//{$domen}{$image}";
+
+      $img = '<img src="' . $url . '" alt="Cat photo" />';
+      $image_link = '<a href="' . $url . '" target="_blank">' . $img . '</a>';
       $render_link = render($image_link);
       $link_markup = Markup::create($render_link);
-
-//      $url = 'http://{$link}{$image}';
-//      $render_url = render($url);
-//      $url_markup = Markup::create($render_url);
-
-//      $link = Link::fromTextAndUrl($image_markup, $url);
-//      $link = $link->toRenderable();
-//      $render_link = render($link);
-
-//      $url = $data->get('fid')->getValue();
 
       $rows[] = [
         'name' => $data->name,

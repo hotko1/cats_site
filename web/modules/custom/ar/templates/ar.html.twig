@@ -1,39 +1,4 @@
-{#{{ items }}#}
-
-{#<div class="ar_page">{{ items }}</div>#}
-{#<div class="ar_page">{{ forms }}</div>#}
-{#<div class="ar_page">{{ tables }}</div>#}
-
-{#<form method="post" action="">#}
-{#  <div class="form_wrapper">#}
-{#    {{ forms }}#}
-{#  </div>#}
-{#</form>#}
-
-{#  {{ forms.form_build_id }}#}
-{#  {{ forms.form_id }}#}
-{#  {{ forms.form_token }}#}
-
-{#  <div class="input_item">{{ forms.name }}</div>#}
-{#  <div class="input_item">{{ forms.email_user }}</div>#}
-{#  <div class="input_item">{{ forms.fid }}</div>#}
-{#  <div class="input_item">{{ forms.submit }}</div>#}
-
-{#<div class="form_wrapper">#}
-{#  {{ forms }}#}
-{#  {% if forms %}#}
-{#    <div class="input_item">{{ forms.name }}</div>#}
-{#    <div class="input_item">{{ forms.email_user }}</div>#}
-{#    <div class="input_item">{{ forms.fid }}</div>#}
-{#    <div class="input_item">{{ forms.submit }}</div>#}
-{#  {% endif %}#}
-{#</div>#}
-{#{% if title %}#}
-{#  <h2>#}
-{#    {{ title }}#}
-{#  </h2>#}
-{#{% endif %}#}
-<h2>{{ title }}</h2>
+{{ attach_library('ar/ar_block') }}
 {% if forms %}
   <div class="form_wrapper">
     {{ forms }}
@@ -42,10 +7,5 @@
 {% if tables %}
   <div class="ar_table">
     {{ tables }}
-    {% if img %}
-      <img{{ create_attribute('target', '_blank') }}>
-    {% endif %}
   </div>
 {% endif %}
-
-{#<div class="ar_table">{{ tables }}</div>#}
