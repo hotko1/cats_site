@@ -10,8 +10,10 @@ ar.delete_form:
   defaults:
     _form: '\Drupal\ar\Form\ArDelete'
     _title: 'DeleteForm'
+    _controller: '\Drupal\ar\Controller\ArModalController::Modal'
   requirements:
-    _access: 'TRUE'
+#    _access: 'TRUE'
+    _permission: 'access content'
 
 ar.edit_form:
   path: '/ar/edit'

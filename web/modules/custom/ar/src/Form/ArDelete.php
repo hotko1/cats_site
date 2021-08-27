@@ -2,8 +2,10 @@
 
 namespace Drupal\ar\Form;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfirmFormBase;
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 
 /**
@@ -64,7 +66,23 @@ class ArDelete extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
+    $link_url = Url::fromRoute('ar.delete_form');
+    $link_url->setOptions([
+      'attributes' => [
+        'class' => ['use-ajax', 'button', 'button--small'],
+        'data-dialog-type' => 'modal',
+        'data-dailog-options' => Json::encode(['width' => 400]),
+      ],
+    ]);
+
     $this->id = $id;
+
+//    return [
+//      '#type' => 'markup',
+//      '#markup' => Link::fromTextAndUrl($this->t('Open modal'), $link_url)->toString(),
+//      '#build' => parent::buildForm($form, $form_state),
+//      '#attached' => ['library' => ['core/drupal.dialog.ajax']],
+//    ];
     return parent::buildForm($form, $form_state);
   }
 

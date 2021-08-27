@@ -7,6 +7,7 @@ use Drupal\Core\Link;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
+use Drupal\menu_link_content\Plugin\migrate\process\LinkUri;
 
 /**
  * Provides a block called "Example ar block".
@@ -49,8 +50,26 @@ class ArBlock extends Database {
       $link_markup = Markup::create($render_link);
 
       $url_delete = Url::fromRoute('ar.delete_form', ['id' => $data->id], []);
+//      $data_array = [
+//        'data' => [
+//          'data' => $url_delete->toString(),
+//          'class' => ['type'],
+//        ],
+//      ];
+      $data_array = [
+        'data' => $url_delete->toString(),
+//        'class' => 'type',
+      ];
+//      $url_delete->toString();
+//      $url_delete->toString(TRUE)->getGeneratedUrl();
+//      $url_delete->toString($url_delete);
+      $url_full_delete = "{$protocol}//{$domen}{$data_array['data']}";
       $text_delete = t('Delete');
-      $link_delete = Link::fromTextAndUrl($text_delete, $url_delete);
+      $link_delete = '<a class=“use-ajax” data-dialog-type=“modal" href="' . $url_full_delete . '" target="_blank">' . $text_delete . '</a>';
+      $render_delete = render($link_delete);
+      $delete_markup = Markup::create($render_delete);
+//      $text_delete = t('Delete');
+//      $link_delete = Link::fromTextAndUrl($text_delete, $url_delete);
 
       $url_edit = Url::fromRoute('ar.edit_form', ['id' => $data->id], []);
       $text_edit = t('Edit');
@@ -61,7 +80,7 @@ class ArBlock extends Database {
         'email_user' => $data->email_user,
         'fid' => $link_markup,
         'time' => $timeout,
-        'delete' => $link_delete,
+        'delete' => $delete_markup,
         'edit' => $link_edit,
       ];
     }

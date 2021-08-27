@@ -2,7 +2,6 @@
 
 namespace Drupal\ar\Form;
 
-//use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
@@ -165,8 +164,6 @@ class ArForm extends FormBase {
       else {
         \Drupal::database()->insert('ar')->fields($data)->execute();
       }
-
-//      \Drupal::database()->insert('ar')->fields($data)->execute();
 
     }
 
