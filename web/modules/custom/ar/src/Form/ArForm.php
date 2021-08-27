@@ -2,6 +2,7 @@
 
 namespace Drupal\ar\Form;
 
+//use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
@@ -158,7 +159,14 @@ class ArForm extends FormBase {
       $file->setPermanent();
       $file->save();
 
-      \Drupal::database()->insert('ar')->fields($data)->execute();
+      if (isset($_GET['id'])) {
+        \Drupal::database()->update('ar')->fields($data)->condition('id', $_GET['id'])->execute();
+      }
+      else {
+        \Drupal::database()->insert('ar')->fields($data)->execute();
+      }
+
+//      \Drupal::database()->insert('ar')->fields($data)->execute();
 
     }
 
