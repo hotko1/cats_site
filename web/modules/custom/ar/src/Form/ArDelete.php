@@ -147,20 +147,51 @@ class ArDelete extends ConfirmFormBase {
 
     $fid = json_decode(json_encode($fid), TRUE);
 
-    $re_fid = $fid[0]['fid'];
+    foreach ($fid as $key) {
+//      $key['fid'] = $key;
+      $key = $key['fid'];
+
+      $querys = \Drupal::database();
+      $querys->update('file_managed')
+        ->condition('fid', $key)
+        ->fields(['status' => '0'])
+        ->execute();
+
+      $query = \Drupal::database();
+      $query->delete('ar')
+        ->condition('id', $this->id)
+        ->execute();
+//      foreach ($key as $keys) {
+//        $querys = \Drupal::database();
+//        $querys->update('file_managed')
+//          ->condition('fid', $keys)
+//          ->fields(['status' => '0'])
+//          ->execute();
+//
+//        $query = \Drupal::database();
+//        $query->delete('ar')
+//          ->condition('id', $this->id)
+//          ->execute();
+//      }
+    }
+
+//    $key = $_POST[$fid][0];
+
+//    $re_fid = $fid[0][0]['fid'];
 
 //    $files = File::load($fid[0]['fid']);
-    $files = File::load($re_fid);
-    $files->setTemporary();
 
-    $query->update('file_managed')
-      ->condition('fid', $fid)
-      ->fields(['status' => 0]);
+//    $files = File::load($key);
+//    $files->setTemporary();
+
+//    $query->update('file_managed')
+//      ->condition('fid', $fid)
+//      ->fields(['status' => 0]);
 
 //    $query = \Drupal::database();
-    $query->delete('ar')
-      ->condition('id', $this->id)
-      ->execute();
+//    $query->delete('ar')
+//      ->condition('id', $this->id)
+//      ->execute();
 
 //    $file->delete();
 //    $querys = \Drupal::database();
