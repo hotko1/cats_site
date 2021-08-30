@@ -57,6 +57,11 @@ class ArForm extends FormBase {
       ],
     ];
 
+    $form['fid_message'] = [
+      '#type' => 'markup',
+      '#markup' => '<div class="fid-result_message"></div>',
+    ];
+
     $form['fid'] = [
       '#type' => 'managed_file',
       '#title' => $this->t('Download image'),
@@ -112,6 +117,11 @@ class ArForm extends FormBase {
   public function setMessage(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
     $cat_name = strlen($form_state->getValue('name'));
+    $cat_photo = ($form_state->getValue('fid'));
+    $fid = json_decode(json_encode($cat_photo), TRUE);
+    foreach ($fid as $key) {
+      $key = $key['fid'];
+    }
     if (!preg_match('/^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/', $form_state->getValue('email_user'))) {
       $response->addCommand(
         new HtmlCommand(
@@ -133,6 +143,14 @@ class ArForm extends FormBase {
         new HtmlCommand(
           '.result_message',
           '<div class="novalid">' . $this->t('Cat name is too long. Please enter a really cat name.')
+        )
+      );
+    }
+    elseif (!isset($key)) {
+      $response->addCommand(
+        new HtmlCommand(
+          '.fid-result_message',
+          '<div class="novalid">' . $this->t('Download image field is required')
         )
       );
     }

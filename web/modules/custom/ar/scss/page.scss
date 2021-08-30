@@ -17,7 +17,11 @@
         }
         .form_wrapper{
           .ar-form{
-            .result_message, .email-result_message{
+            .fid-result_message{
+              margin-top: 50px;
+              margin-bottom: 0;
+            }
+            .result_message, .email-result_message, .fid-result_message{
               margin-bottom: 15px;
               text-align: center;
               .valid{
