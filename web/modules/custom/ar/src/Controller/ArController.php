@@ -2,8 +2,6 @@
 
 namespace Drupal\ar\Controller;
 
-//use Drupal\Core\Ajax\AjaxResponse;
-//use Drupal\Core\Ajax\OpenModalDialogCommand;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\ar\Form\ArBlock;
 

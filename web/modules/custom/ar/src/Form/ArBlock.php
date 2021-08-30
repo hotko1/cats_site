@@ -2,8 +2,6 @@
 
 namespace Drupal\ar\Form;
 
-//use Drupal\menu_link_content\Plugin\migrate\process\LinkUri;
-//use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Link;
 use Drupal\Core\Render\Markup;
@@ -20,7 +18,6 @@ class ArBlock extends Database {
    * {@inheritdoc}
    */
   public function build() {
-
     $query = \Drupal::database()->select('ar', 'n');
     $query->fields('n', ['id', 'name', 'email_user', 'fid', 'time']);
     $result = $query->execute()->fetchAll();
@@ -41,22 +38,12 @@ class ArBlock extends Database {
       else {
         $protocol = 'http:';
       }
-      $url = "{$protocol}//{$domen}{$image}";
 
+      $url = "{$protocol}//{$domen}{$image}";
       $img = '<img src="' . $url . '" alt="Cat photo" />';
       $image_link = '<a href="' . $url . '" target="_blank">' . $img . '</a>';
       $render_link = render($image_link);
       $link_markup = Markup::create($render_link);
-
-//      $url_delete = Url::fromRoute('ar.delete_form', ['id' => $data->id], []);
-//      $data_array = [
-//        'data' => $url_delete->toString(),
-//      ];
-//      $url_full_delete = "{$protocol}//{$domen}{$data_array['data']}";
-//      $text_delete = t('Delete');
-//      $link_delete = '<a class=“use-ajax” data-dialog-type=“modal" href="' . $url_full_delete . '">' . $text_delete . '</a>';
-//      $render_delete = render($link_delete);
-//      $delete_markup = Markup::create($render_delete);
 
       $text_delete = t('Delete');
       $link_url = Url::fromRoute('ar.delete_form', ['id' => $data->id], []);
