@@ -122,6 +122,7 @@ class ArForm extends FormBase {
     foreach ($fid as $key) {
       $key = $key['fid'];
     }
+    $key['0'] = $fid;
     if (!preg_match('/^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/', $form_state->getValue('email_user'))) {
       $response->addCommand(
         new HtmlCommand(
@@ -146,7 +147,7 @@ class ArForm extends FormBase {
         )
       );
     }
-    elseif (!isset($key)) {
+    elseif (!isset($key['0'])) {
       $response->addCommand(
         new HtmlCommand(
           '.fid-result_message',
