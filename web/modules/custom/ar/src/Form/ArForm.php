@@ -2,11 +2,14 @@
 
 namespace Drupal\ar\Form;
 
+use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\file\Entity\File;
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Our custom ajax form.
@@ -24,6 +27,14 @@ class ArForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $conn = Database::getConnection();
+    $data = [];
+    if (isset($_GET['id'])) {
+      $query = $conn->select('ar', 'n')
+        ->condition('id', $_GET['id'])
+        ->fields('n');
+      $data = $query->execute()->fetchAssoc();
+    }
 
     $form['message'] = [
       '#type' => 'markup',
@@ -34,6 +45,7 @@ class ArForm extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Your cat’s name:'),
       '#required' => TRUE,
+      '#default_value' => (isset($data['name'])) ? $data['name'] : '',
       '#attributes' => [
         'placeholder' => $this->t('The length of the name is 2-32 letters.'),
       ],
@@ -48,6 +60,7 @@ class ArForm extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Your email:'),
       '#required' => TRUE,
+      '#default_value' => (isset($data['email_user'])) ? $data['email_user'] : '',
       '#attributes' => [
         'placeholder' => $this->t('Only Latin letters, "_" and "-".'),
       ],
@@ -66,6 +79,7 @@ class ArForm extends FormBase {
       '#type' => 'managed_file',
       '#title' => $this->t('Download image'),
       '#required' => TRUE,
+      '#default_value' => (isset($data['fid'])) ? $data['fid'] : '',
       '#description' => $this->t('Image should be less than 2 MB and in JPEG, JPG or PNG format.'),
       '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg'],

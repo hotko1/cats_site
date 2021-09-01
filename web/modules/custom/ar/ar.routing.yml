@@ -17,6 +17,6 @@ ar.edit_form:
   path: '/ar/edit'
   defaults:
     _title: 'EditForm'
-    _form: '\Drupal\ar\Form\EditForm'
+    _form: '\Drupal\ar\Form\ArEdit'
   requirements:
     _permission: 'access content'

@@ -45,18 +45,25 @@ class ArBlock extends Database {
       $link_markup = Markup::create($render_link);
 
       $text_delete = t('Delete');
-      $link_url = Url::fromRoute('ar.delete_form', ['id' => $data->id], []);
-      $link_url->setOptions([
+      $url_delete = Url::fromRoute('ar.delete_form', ['id' => $data->id], []);
+      $url_delete->setOptions([
         'attributes' => [
           'class' => ['use-ajax', 'button', 'button--small'],
           'data-dialog-type' => 'modal',
-          'data-dialog-options' => Json::encode(['width' => 400]),
+          'data-dialog-options' => Json::encode(['width' => 900]),
         ],
       ]);
-      $link_delete = Link::fromTextAndUrl($text_delete, $link_url);
+      $link_delete = Link::fromTextAndUrl($text_delete, $url_delete);
 
-      $url_edit = Url::fromRoute('ar.edit_form', ['id' => $data->id], []);
       $text_edit = t('Edit');
+      $url_edit = Url::fromRoute('ar.edit_form', ['id' => $data->id], []);
+//      $url_edit->setOptions([
+//        'attributes' => [
+//          'class' => ['use-ajax', 'button', 'button--small'],
+//          'data-dialog-type' => 'modal',
+//          'data-dialog-options' => Json::encode(['width' => 400]),
+//        ],
+//      ]);
       $link_edit = Link::fromTextAndUrl($text_edit, $url_edit);
 
       $rows[] = [
