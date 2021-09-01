@@ -23,21 +23,8 @@ class ArBlock extends Database {
     $result = $query->execute()->fetchAll();
 
     $rows = [];
-//    $result = json_decode(json_encode($result), TRUE);
-//    $result = array_reverse($result);
 
     foreach ($result as $data) {
-//      $data['time'] = date("d/m/Y H:i:s", $data['time']);
-//      $fid = $data['fid'];
-//      $file = File::load($fid);
-//      $data['fid'] = !empty($file) ? file_url_transform_relative(file_create_url($file->getFileUri())) : '';
-
-//      $datas = [
-//        $data['name'],
-//        $data['email_user'],
-//        $data['time'],
-//        $data['fid'],
-//      ];
       $timestamp = $data->time;
       $timeout = date("d/m/Y H:i:s", $timestamp);
 
@@ -52,8 +39,8 @@ class ArBlock extends Database {
         $protocol = 'http:';
       }
       $url = "{$protocol}//{$domen}{$image}";
-      $img = '<img src="' . $url . '" alt="Cat photo" />';
-      $image_link = '<a href="' . $url . '" target="_blank">' . $img . '</a>';
+      $img = '<img class="image-cat" src="' . $url . '" alt="Cat photo" />';
+      $image_link = '<a class="link-image" href="' . $url . '" target="_blank">' . $img . '</a>';
       $render_link = render($image_link);
       $link_markup = Markup::create($render_link);
 
@@ -84,22 +71,7 @@ class ArBlock extends Database {
 
     $revers = array_reverse($rows);
 
-//    $header = [
-//      'name' => t('Name'),
-//      'email_user' => t('Email user'),
-//      'fid' => t('Image'),
-//      'time' => t('Time'),
-//      'delete' => t('Delete'),
-//      'edit' => t('Edit'),
-//    ];
-//    $output = [
-//      '#type' => 'table',
-//      '#header' => $header,
-//      '#rows' => $revers,
-//    ];
-
     return $revers;
-//    return $output;
   }
 
 }

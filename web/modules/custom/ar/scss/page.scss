@@ -68,33 +68,54 @@
             }
           }
         }
-        .ar_table{
-          .table-responsive{
-            .table-hover{
-              thead{
-                tr{
-                  th{
-                    text-align: center;
+        .outputs_wrapper{
+          margin-top: 40px;
+          .outputs_item{
+            margin-top: 20px;
+            padding: 25px;
+            background: #ffcc66;
+            .top{
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              margin: 20px;
+              margin-bottom: 0;
+              .top-left{
+                .names{
+                  margin: 0;
+                  font-size: 28px;
+                }
+                .emails{
+                  margin-top: 25px;
+                  margin-bottom: 0;
+                  font-size: 18px;
+                }
+                .times{
+                  margin-top: 25px;
+                  font-size: 18px;
+                }
+              }
+              .top-right{
+                .link-image{
+                  .image-cat{
+                    object-fit: cover;
+                    width: 350px;
+                    height: 350px;
                   }
                 }
               }
-              tbody{
-                tr{
-                  td{
-                    text-align: center;
-                    vertical-align: middle;
-                    a{
-                      display: block;
-                      margin: 0 auto;
-                      max-width: 350px;
-                      max-height: 350px;
-                      img{
-                        object-fit: cover;
-                        width: 350px;
-                        height: 350px;
-                      }
-                    }
-                  }
+            }
+            .bottom{
+              a{
+                display: inline-block;
+                padding: 15px;
+                width: 100px;
+                background: #990000;
+                font-weight: 600;
+                color: #ffffff;
+                text-align: center;
+                + a{
+                  margin-left: 20px;
                 }
               }
             }

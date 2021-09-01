@@ -5,22 +5,24 @@
   </div>
 {% endif %}
 
-<div class="outputs_inner">
+<div class="outputs_wrapper">
   {% for card in tables %}
   <div class="outputs_item">
     <div class="top">
-      <p class="names">
-        {{ card['name'] }}
-      </p>
-      <p class="emails">
-        {{ card['email_user'] }}
-      </p>
-      <p class="times">
-        {{ card['time'] }}
-      </p>
-    </div>
-    <div class="middle">
-      {{ card['fid'] }}
+      <div class="top-left">
+        <h3 class="names">
+          {{ card['name'] }}
+        </h3>
+        <p class="emails">
+          {{ card['email_user'] }}
+        </p>
+        <p class="times">
+          {{ card['time'] }}
+        </p>
+      </div>
+      <div class="top-right">
+        {{ card['fid'] }}
+      </div>
     </div>
     {% if user.hasPermission('ROLE_ADMIN') %}
     <div class="bottom">
