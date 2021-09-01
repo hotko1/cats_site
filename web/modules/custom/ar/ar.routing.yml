@@ -2,6 +2,7 @@ ar.artext:
   path: '/ar/cats'
   defaults:
     _controller: '\Drupal\ar\Controller\ArController::Content'
+#    _form: '\Drupal\ar\Form\ArEdit'
   requirements:
     _permission: 'access content'
 
@@ -14,7 +15,7 @@ ar.delete_form:
     _access: 'TRUE'
 
 ar.edit_form:
-  path: '/ar/edit'
+  path: '/ar/{id}/edit'
   defaults:
     _title: 'EditForm'
     _form: '\Drupal\ar\Form\ArEdit'

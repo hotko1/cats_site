@@ -30,15 +30,38 @@ class ArEdit extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public $id;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
     $conn = Database::getConnection();
     $data = [];
-    if (isset($_GET['id'])) {
-      $query = $conn->select('ar', 'n')
-        ->condition('id', $_GET['id'])
-        ->fields('n');
-      $data = $query->execute()->fetchAssoc();
-    }
+//    if (isset($_GET['id'])) {
+//      $query = $conn->select('ar', 'n')
+//        ->condition('id', $_GET['id'])
+//        ->fields('n');
+//      $data = $query->execute()->fetchAssoc();
+//    }
+
+    $query = $conn->select('ar', 'n')
+      ->condition('id', $id)
+      ->fields('n');
+    $data = $query->execute()->fetchAssoc();
+
+//    $query = \Drupal::database();
+//    $id = $this->id;
+//    $fid = $query
+//      ->select('ar', 'data')
+//      ->condition('id', $id)
+//      ->fields('data', ['id', 'name', 'email_user', 'fid'])
+//      ->execute()->fetchAll();
+//    $fid = json_decode(json_encode($fid), TRUE);
+
+//    foreach ($fid as $key) {
+//      $key = $key['fid'];
+//    }
 
     $form['message'] = [
       '#type' => 'markup',
@@ -83,7 +106,8 @@ class ArEdit extends FormBase {
       '#type' => 'managed_file',
       '#title' => $this->t('Download image'),
       '#required' => TRUE,
-      '#default_value' => (isset($data['fid'])) ? $data['fid'] : '',
+//      '#default_value' => (isset($data['fid'])) ? $data['fid'] : '',
+      '#default_value' => [$data['fid']],
       '#description' => $this->t('Image should be less than 2 MB and in JPEG, JPG or PNG format.'),
       '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg'],
@@ -195,13 +219,19 @@ class ArEdit extends FormBase {
       $file->setPermanent();
       $file->save();
 
-      if (isset($_GET['id'])) {
-        \Drupal::database()->update('ar')->fields($data)->condition('id', $_GET['id'])->execute();
-      }
-      else {
-        \Drupal::database()->insert('ar')->fields($data)->execute();
-      }
+//      if (isset($id)) {
+//        \Drupal::database()->update('ar')->fields($data)->condition('id', $id)->execute();
+//      }
+//      else {
+//        \Drupal::database()->insert('ar')->fields($data)->execute();
+//      }
 
+      \Drupal::database()->update('ar')->fields($data)->condition('id', $this->id)->execute();
+
+//      \Drupal::database()->update('ar')->fields($data)->condition('id', $this->id)->execute();
+
+      \Drupal::messenger()->addStatus('Succesfully update.');
+      $form_state->setRedirect('ar.artext');
     }
 
     return $response;

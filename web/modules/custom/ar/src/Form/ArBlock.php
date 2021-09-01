@@ -57,13 +57,13 @@ class ArBlock extends Database {
 
       $text_edit = t('Edit');
       $url_edit = Url::fromRoute('ar.edit_form', ['id' => $data->id], []);
-//      $url_edit->setOptions([
-//        'attributes' => [
-//          'class' => ['use-ajax', 'button', 'button--small'],
-//          'data-dialog-type' => 'modal',
-//          'data-dialog-options' => Json::encode(['width' => 400]),
-//        ],
-//      ]);
+      $url_edit->setOptions([
+        'attributes' => [
+          'class' => ['use-ajax', 'button', 'button--small'],
+          'data-dialog-type' => 'modal',
+          'data-dialog-options' => Json::encode(['width' => 400]),
+        ],
+      ]);
       $link_edit = Link::fromTextAndUrl($text_edit, $url_edit);
 
       $rows[] = [
