@@ -4,9 +4,7 @@
     {{ forms }}
   </div>
 {% endif %}
-{#{% if tables[''] matches '/^\\d+$/' %}#}
-{#  {{ tables['']['delete'] }}#}
-{#{% endif %}#}
+
 <div class="outputs_inner">
   {% for card in tables %}
   <div class="outputs_item">
@@ -24,67 +22,12 @@
     <div class="middle">
       {{ card['fid'] }}
     </div>
+    {% if user.hasPermission('ROLE_ADMIN') %}
     <div class="bottom">
       {{ card['delete'] }}
       {{ card['edit'] }}
     </div>
+    {% endif %}
   </div>
   {% endfor %}
 </div>
-
-{#{{ tables['#rows']['0']['delete']}}#}
-{#{{ tables['#header']['delete']}}#}
-
-{#{% for k in result_dict.items() %}#}
-
-{#{% endfor %}#}
-{#{% if k > -1 %}#}
-{#  {{ tables['#rows']['k']['delete']}}#}
-{#{% endif %}#}
-{#{% if tables %}#}
-{#  <div class="ar_table">#}
-{#    {{ tables }}#}
-{#  </div>#}
-{#{% endif %}#}
-
-{#{{ inline_templates }}#}
-{#{{ inline_template }}#}
-{#{{ textfields }}#}
-{#{{ container }}#}
-{#{{ containers }}#}
-
-{#{{ tables }}#}
-{#{{ revers }}#}
-{#{{ revers.name }}#}
-
-{#{{ output[name] }}#}
-{#{{ output.name }}#}
-{#{{ output[0] }}#}
-{#{{ tables.output }}#}
-
-{#{% for name in rows %}#}
-{#{% endfor %}#}
-
-{#{% block revers %}#}
-{#  {{ name }}#}
-{#{% endblock %}#}
-
-{#{% block revers %}#}
-{#{% endblock %}#}
-
-{#{{ tables.name }}#}
-{#{{ tables.email_user }}#}
-{#{{ tables.time }}#}
-{#{{ tables.fid }}#}
-{#{{ reverss }}#}
-
-{#{{ tables }}#}
-{#{{ revers }}#}
-{#{{ reverss }}#}
-
-{#{{ tables.fid }}#}
-{#{{ tables[name] }}#}
-{#{{ tables.output.rows.name }}#}
-{#{{ tables.rows.name }}#}
-{#{{ tables.rows.revers.name }}#}
-{#{{ tables.output.rows.revers.name }}#}
