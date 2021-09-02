@@ -50,7 +50,7 @@ class ArBlock extends Database {
         'attributes' => [
           'class' => ['use-ajax', 'button', 'button--small'],
           'data-dialog-type' => 'modal',
-          'data-dialog-options' => Json::encode(['width' => 900]),
+          'data-dialog-options' => Json::encode(['width' => 400]),
         ],
       ]);
       $link_delete = Link::fromTextAndUrl($text_delete, $url_delete);
@@ -61,7 +61,7 @@ class ArBlock extends Database {
         'attributes' => [
           'class' => ['use-ajax', 'button', 'button--small'],
           'data-dialog-type' => 'modal',
-          'data-dialog-options' => Json::encode(['width' => 400]),
+          'data-dialog-options' => Json::encode(['width' => 600]),
         ],
       ]);
       $link_edit = Link::fromTextAndUrl($text_edit, $url_edit);

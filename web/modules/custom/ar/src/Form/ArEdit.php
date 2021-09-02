@@ -36,19 +36,22 @@ class ArEdit extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
+    $this->id = $id;
     $conn = Database::getConnection();
-    $data = [];
+//    $data = [];
 //    if (isset($_GET['id'])) {
 //      $query = $conn->select('ar', 'n')
 //        ->condition('id', $_GET['id'])
 //        ->fields('n');
 //      $data = $query->execute()->fetchAssoc();
 //    }
-
     $query = $conn->select('ar', 'n')
       ->condition('id', $id)
       ->fields('n');
+//      ->fields('n', ['id', 'name', 'email_user', 'fid']);
     $data = $query->execute()->fetchAssoc();
+
+//    global $id;
 
 //    $query = \Drupal::database();
 //    $id = $this->id;
@@ -156,7 +159,22 @@ class ArEdit extends FormBase {
   /**
    * Our custom ajax response.
    */
-  public function setMessage(array &$form, FormStateInterface $form_state) {
+  public function setMessage(array &$form, FormStateInterface $form_state, $id = NULL) {
+    $conn = Database::getConnection();
+    $query = $conn->select('ar', 'n')
+      ->condition('id', $id)
+      ->fields('n');
+    $data = $query->execute()->fetchAssoc();
+
+//    $conn = Database::getConnection();
+//    $data = [];
+//    if (isset($_GET['id'])) {
+//      $query = $conn->select('mytable', 'm')
+//        ->condition('id', $_GET['id'])
+//        ->fields('m');
+//      $data = $query->execute()->fetchAssoc();
+//    }
+//    $id = ($form_state->getValue('id'));
     $response = new AjaxResponse();
     $cat_name = strlen($form_state->getValue('name'));
     $cat_photo = ($form_state->getValue('fid'));
@@ -206,32 +224,41 @@ class ArEdit extends FormBase {
       );
 
       $image = $form_state->getValue('fid');
-      $time = \Drupal::time()->getCurrentTime();
+//      $id = $form_state->getValue('id');
+//      $time = \Drupal::time()->getCurrentTime();
+//      $time = \Drupal::time()->getCurrentTime();
+//      $time = (isset($data['time'])) ? $data['time'] : '';
+//      $times = $data['time'];
       $data = [
-        'id' => $form_state->getValue('id'),
+//        'id' => $form_state->getValue('id'),
         'name' => $form_state->getValue('name'),
         'email_user' => $form_state->getValue('email_user'),
         'fid' => $image[0],
-        'time' => $time,
       ];
 
       $file = File::load($image[0]);
       $file->setPermanent();
       $file->save();
 
-//      if (isset($id)) {
-//        \Drupal::database()->update('ar')->fields($data)->condition('id', $id)->execute();
-//      }
-//      else {
-//        \Drupal::database()->insert('ar')->fields($data)->execute();
-//      }
+      if (isset($this->id)) {
+        \Drupal::database()->update('ar')->fields($data)->condition('id', $this->id)->execute();
+        \Drupal::messenger()->addStatus('Succesfully update.');
+        $form_state->setRedirect('ar.artext');
+      }
+      else {
+        \Drupal::database()->insert('ar')->fields($data)->execute();
+      }
 
-      \Drupal::database()->update('ar')->fields($data)->condition('id', $this->id)->execute();
+//      \Drupal::database()
+//        ->update('ar')
+//        ->condition('id', $id)
+//        ->fields($data)
+//        ->execute();
 
 //      \Drupal::database()->update('ar')->fields($data)->condition('id', $this->id)->execute();
 
-      \Drupal::messenger()->addStatus('Succesfully update.');
       $form_state->setRedirect('ar.artext');
+      \Drupal::messenger()->addStatus('Succesfully update.');
     }
 
     return $response;

@@ -191,12 +191,12 @@ class ArForm extends FormBase {
       $file->setPermanent();
       $file->save();
 
-      if (isset($_GET['id'])) {
-        \Drupal::database()->update('ar')->fields($data)->condition('id', $_GET['id'])->execute();
-      }
-      else {
-        \Drupal::database()->insert('ar')->fields($data)->execute();
-      }
+//      if (isset($_GET['id'])) {
+//        \Drupal::database()->update('ar')->fields($data)->condition('id', $_GET['id'])->execute();
+//      }
+//      else {
+//        \Drupal::database()->insert('ar')->fields($data)->execute();
+//      }
 
     }
 
@@ -206,6 +206,8 @@ class ArForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {}
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    return $form;
+  }
 
 }
