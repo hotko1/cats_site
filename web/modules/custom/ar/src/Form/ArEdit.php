@@ -2,14 +2,11 @@
 
 namespace Drupal\Ar\Form;
 
+use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Database\Database;
-//use Drupal\Core\Form\ConfirmFormBase;
-//use Drupal\Ar\Form\ArForm;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-//use Drupal\Core\Url;
 use Drupal\file\Entity\File;
-//use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 
@@ -38,33 +35,10 @@ class ArEdit extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
     $this->id = $id;
     $conn = Database::getConnection();
-//    $data = [];
-//    if (isset($_GET['id'])) {
-//      $query = $conn->select('ar', 'n')
-//        ->condition('id', $_GET['id'])
-//        ->fields('n');
-//      $data = $query->execute()->fetchAssoc();
-//    }
     $query = $conn->select('ar', 'n')
       ->condition('id', $id)
       ->fields('n');
-//      ->fields('n', ['id', 'name', 'email_user', 'fid']);
     $data = $query->execute()->fetchAssoc();
-
-//    global $id;
-
-//    $query = \Drupal::database();
-//    $id = $this->id;
-//    $fid = $query
-//      ->select('ar', 'data')
-//      ->condition('id', $id)
-//      ->fields('data', ['id', 'name', 'email_user', 'fid'])
-//      ->execute()->fetchAll();
-//    $fid = json_decode(json_encode($fid), TRUE);
-
-//    foreach ($fid as $key) {
-//      $key = $key['fid'];
-//    }
 
     $form['message'] = [
       '#type' => 'markup',
@@ -109,7 +83,6 @@ class ArEdit extends FormBase {
       '#type' => 'managed_file',
       '#title' => $this->t('Download image'),
       '#required' => TRUE,
-//      '#default_value' => (isset($data['fid'])) ? $data['fid'] : '',
       '#default_value' => [$data['fid']],
       '#description' => $this->t('Image should be less than 2 MB and in JPEG, JPG or PNG format.'),
       '#upload_validators' => [
@@ -118,6 +91,9 @@ class ArEdit extends FormBase {
       ],
       '#upload_location' => 'public://images',
     ];
+
+    global $_global_fid;
+    $_global_fid = $data['fid'];
 
     $form['submit'] = [
       '#type' => 'button',
@@ -160,21 +136,12 @@ class ArEdit extends FormBase {
    * Our custom ajax response.
    */
   public function setMessage(array &$form, FormStateInterface $form_state, $id = NULL) {
-    $conn = Database::getConnection();
-    $query = $conn->select('ar', 'n')
-      ->condition('id', $id)
-      ->fields('n');
-    $data = $query->execute()->fetchAssoc();
-
 //    $conn = Database::getConnection();
-//    $data = [];
-//    if (isset($_GET['id'])) {
-//      $query = $conn->select('mytable', 'm')
-//        ->condition('id', $_GET['id'])
-//        ->fields('m');
-//      $data = $query->execute()->fetchAssoc();
-//    }
-//    $id = ($form_state->getValue('id'));
+//    $query = $conn->select('ar', 'n')
+//      ->condition('id', $id)
+//      ->fields('n');
+//    $data = $query->execute()->fetchAssoc();
+
     $response = new AjaxResponse();
     $cat_name = strlen($form_state->getValue('name'));
     $cat_photo = ($form_state->getValue('fid'));
@@ -224,17 +191,21 @@ class ArEdit extends FormBase {
       );
 
       $image = $form_state->getValue('fid');
-//      $id = $form_state->getValue('id');
-//      $time = \Drupal::time()->getCurrentTime();
-//      $time = \Drupal::time()->getCurrentTime();
-//      $time = (isset($data['time'])) ? $data['time'] : '';
-//      $times = $data['time'];
       $data = [
-//        'id' => $form_state->getValue('id'),
         'name' => $form_state->getValue('name'),
         'email_user' => $form_state->getValue('email_user'),
         'fid' => $image[0],
       ];
+
+      global $_global_fid;
+      $image_fid = $_global_fid;
+      if ($image[0] != $image_fid) {
+        $querys = \Drupal::database();
+        $querys->update('file_managed')
+          ->condition('fid', $image_fid)
+          ->fields(['status' => '0'])
+          ->execute();
+      }
 
       $file = File::load($image[0]);
       $file->setPermanent();
@@ -242,25 +213,16 @@ class ArEdit extends FormBase {
 
       if (isset($this->id)) {
         \Drupal::database()->update('ar')->fields($data)->condition('id', $this->id)->execute();
-        \Drupal::messenger()->addStatus('Succesfully update.');
-        $form_state->setRedirect('ar.artext');
       }
       else {
         \Drupal::database()->insert('ar')->fields($data)->execute();
       }
 
-//      \Drupal::database()
-//        ->update('ar')
-//        ->condition('id', $id)
-//        ->fields($data)
-//        ->execute();
-
-//      \Drupal::database()->update('ar')->fields($data)->condition('id', $this->id)->execute();
-
-      $form_state->setRedirect('ar.artext');
-      \Drupal::messenger()->addStatus('Succesfully update.');
     }
 
+    \Drupal::messenger()->addStatus('Succesfully update');
+
+    $response->addCommand(new RedirectCommand('cats'));
     return $response;
   }
 
