@@ -24,7 +24,7 @@ class ArController extends ControllerBase {
       '#theme' => 'ar',
       '#forms' => $simpleform,
       '#tables' => $tableOutput,
-      '#title' => 'Hello! You can add here a photo of your cat.',
+      '#title' => $this->t('Hello! You can add here a photo of your cat.'),
     ];
   }
 

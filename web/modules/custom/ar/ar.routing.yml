@@ -20,3 +20,10 @@ ar.edit_form:
     _form: '\Drupal\ar\Form\ArEdit'
   requirements:
     _permission: 'access content'
+
+ar.structure:
+  path: '/cats_list'
+  defaults:
+    _controller: '\Drupal\ar\Controller\CatsListController::Content'
+  requirements:
+    _role: 'administrator'

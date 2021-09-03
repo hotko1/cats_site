@@ -66,7 +66,20 @@ class ArBlock extends Database {
       ]);
       $link_edit = Link::fromTextAndUrl($text_edit, $url_edit);
 
+//      $options = [
+//        1 => [
+//          'first_name' => 'Indy',
+//          'last_name' => 'Jones',
+//        ],
+//        2 => [
+//          'first_name' => 'Darth',
+//          'last_name' => 'Vader',
+//        ],
+//      ];
+//      options[] = $options;
       $rows[] = [
+//        '#type' => 'tableselect',
+//        '#options' => $options,
         'name' => $data->name,
         'email_user' => $data->email_user,
         'fid' => $link_markup,
@@ -77,6 +90,16 @@ class ArBlock extends Database {
     }
 
     $revers = array_reverse($rows);
+
+//    $options = [
+//      1 => [],
+//    ];
+//
+//    $output['table'] = [
+//      '#type' => 'tableselect',
+//      '#options' => $options,
+//      '#rows' => $revers,
+//    ];
 
     return $revers;
   }
