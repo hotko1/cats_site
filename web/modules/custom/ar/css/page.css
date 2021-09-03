@@ -125,11 +125,13 @@ a {
   margin-top: 40px;
 }
 .main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item {
+  display: block;
   margin-top: 20px;
   padding: 25px;
   background: #ffcc66;
 }
 .main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .top {
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;

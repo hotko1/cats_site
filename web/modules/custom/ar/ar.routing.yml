@@ -22,7 +22,7 @@ ar.edit_form:
     _permission: 'access content'
 
 ar.structure:
-  path: '/cats_list'
+  path: '/admin/structure/cats_list'
   defaults:
     _controller: '\Drupal\ar\Controller\CatsListController::Content'
   requirements:

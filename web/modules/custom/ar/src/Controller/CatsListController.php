@@ -3,10 +3,10 @@
 namespace Drupal\ar\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\ar\Form\ArBlock;
+use Drupal\ar\Form\ArAdminList;
 
 /**
- * This is our cats list controller.
+ * This is our ar controller.
  */
 class CatsListController extends ControllerBase {
 
@@ -14,18 +14,10 @@ class CatsListController extends ControllerBase {
    * {@inheritdoc}
    */
   public function content() {
-//    $simpleform = \Drupal::formBuilder()
-//      ->getForm('\Drupal\ar\Form\ArForm');
-
-    $tableOut = new ArBlock();
+    $tableOut = new ArAdminList();
     $tableOutput = $tableOut->build();
 
-    return [
-      '#theme' => 'ar',
-//      '#forms' => $simpleform,
-      '#tables' => $tableOutput,
-      '#title' => $this->t('Cats list.'),
-    ];
+    return $tableOutput;
   }
 
 }

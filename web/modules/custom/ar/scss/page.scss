@@ -83,10 +83,12 @@
           & + .outputs_wrapper{
             margin-top: 40px;
             .outputs_item{
+              display: block;
               margin-top: 20px;
               padding: 25px;
               background: #ffcc66;
               .top{
+                width: 100%;
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
