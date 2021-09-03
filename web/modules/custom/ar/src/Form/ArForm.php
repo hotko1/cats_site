@@ -2,14 +2,11 @@
 
 namespace Drupal\ar\Form;
 
-//use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\file\Entity\File;
-//use Drupal\Core\Url;
-//use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Our custom ajax form.
@@ -117,6 +114,7 @@ class ArForm extends FormBase {
    * Our custom ajax response.
    */
   public function setMessage(array &$form, FormStateInterface $form_state) {
+    \Drupal::messenger()->deleteAll();
     $response = new AjaxResponse();
     $cat_name = strlen($form_state->getValue('name'));
     $cat_photo = ($form_state->getValue('fid'));
@@ -149,7 +147,7 @@ class ArForm extends FormBase {
         )
       );
     }
-    elseif (!isset($key['0'])) {
+    elseif (!isset($fid['0'])) {
       $response->addCommand(
         new HtmlCommand(
           '.fid-result_message',

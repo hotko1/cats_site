@@ -136,12 +136,6 @@ class ArEdit extends FormBase {
    * Our custom ajax response.
    */
   public function setMessage(array &$form, FormStateInterface $form_state, $id = NULL) {
-//    $conn = Database::getConnection();
-//    $query = $conn->select('ar', 'n')
-//      ->condition('id', $id)
-//      ->fields('n');
-//    $data = $query->execute()->fetchAssoc();
-
     $response = new AjaxResponse();
     $cat_name = strlen($form_state->getValue('name'));
     $cat_photo = ($form_state->getValue('fid'));
