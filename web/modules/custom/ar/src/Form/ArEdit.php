@@ -214,7 +214,7 @@ class ArEdit extends FormBase {
 
     }
 
-    \Drupal::messenger()->addStatus('Succesfully update');
+    \Drupal::messenger()->addStatus('Successfully update');
 
     $response->addCommand(new RedirectCommand('cats'));
     return $response;

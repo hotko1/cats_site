@@ -11,7 +11,8 @@ ar.delete_form:
     _title: 'DeleteForm'
     _form: '\Drupal\ar\Form\ArDelete'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
+#    _access: 'TRUE'
 
 ar.edit_form:
   path: '/ar/{id}/edit'
@@ -22,7 +23,7 @@ ar.edit_form:
     _permission: 'access content'
 
 ar.structure:
-  path: '/admin/structure/cats_list'
+  path: '/admin/structure/cats'
   defaults:
     _controller: '\Drupal\ar\Controller\CatsListController::Content'
   requirements:

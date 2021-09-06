@@ -2,6 +2,8 @@
 
 namespace Drupal\ar\Form;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Url;
@@ -76,6 +78,7 @@ class ArDelete extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
     $query = \Drupal::database();
     $id = $this->id;
     $fid = $query
@@ -99,8 +102,11 @@ class ArDelete extends ConfirmFormBase {
       ->condition('id', $this->id)
       ->execute();
 
-    \Drupal::messenger()->addStatus('Succesfully deleted.');
-    $form_state->setRedirect('ar.artext');
+    \Drupal::messenger()->addStatus('Successfully deleted.');
+//    $form_state->setRedirect('ar.artext');
+
+    $response->addCommand(new RedirectCommand('cats'));
+    return $response;
   }
 
 }
