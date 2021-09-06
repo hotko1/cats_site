@@ -69,7 +69,6 @@ class ArDeletes extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
-
     $this->id = $id;
 
     return parent::buildForm($form, $form_state);
