@@ -55,7 +55,7 @@ class ArAdminList extends FormBase {
       $image_markup = Markup::create($render_image);
 
       $text_delete = t('Delete');
-      $url_delete = Url::fromRoute('ar.delete_form', ['id' => $data->id], []);
+      $url_delete = Url::fromRoute('ar.delete_list', ['id' => $data->id], []);
       $url_delete->setOptions([
         'attributes' => [
           'class' => ['use-ajax', 'button', 'button--small'],
@@ -75,9 +75,6 @@ class ArAdminList extends FormBase {
         ],
       ]);
       $link_edit = Link::fromTextAndUrl($text_edit, $url_edit);
-
-//      global $_link_delete_global;
-//      global $_link_edit_global;
 
       $options[$data->id] = [
         'name' => $data->name,

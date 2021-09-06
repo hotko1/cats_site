@@ -74,11 +74,6 @@ class ArBlock extends Database {
         'delete' => $link_delete,
         'edit' => $link_edit,
       ];
-
-//      $_link_delete_global = $link_delete;
-//      global $_link_delete_global;
-//      $_link_edit_global = $link_edit;
-//      global $_link_edit_global;
     }
 
     $revers = array_reverse($rows);

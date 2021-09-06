@@ -28,3 +28,11 @@ ar.structure:
     _controller: '\Drupal\ar\Controller\CatsListController::Content'
   requirements:
     _role: 'administrator'
+
+ar.delete_list:
+  path: '/admin/structure/{id}/delete'
+  defaults:
+    _title: 'DeleteList'
+    _form: '\Drupal\ar\Form\ArDeletes'
+  requirements:
+    _permission: 'access content'
