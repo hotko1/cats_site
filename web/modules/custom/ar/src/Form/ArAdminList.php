@@ -3,25 +3,17 @@
 namespace Drupal\ar\Form;
 
 use Drupal\Component\Serialization\Json;
-use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Form\FormBuilder;
 use Drupal\Core\Link;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
-use Drupal\Core\Render\Element\Tableselect;
 
 /**
- * Provides a block called "Example ar block".
+ * Provides a block called "Example ar admin list".
  */
 class ArAdminList extends FormBase {
-
-//  /**
-//   * {@inheritdoc}
-//   */
-//  public $id;
 
   /**
    * {@inheritdoc}
@@ -42,7 +34,6 @@ class ArAdminList extends FormBase {
     $options = [];
 
     $header = [
-//      'name' => 'Name',
       'id' => 'Id',
       'name' => $this->t('Name'),
       'email_user' => $this->t('Email user'),
@@ -71,9 +62,6 @@ class ArAdminList extends FormBase {
         ],
       ]);
       $link_delete = Link::fromTextAndUrl($text_delete, $url_delete);
-
-//      $_link_delete_all = $link_delete;
-//      global $_link_delete_all;
 
       $text_edit = t('Edit');
       $url_edit = Url::fromRoute('ar.edit_form', ['id' => $data->id], []);
@@ -109,14 +97,8 @@ class ArAdminList extends FormBase {
 
     $form['delete select'] = [
       '#type' => 'submit',
-//      '#button_type' => 'submit',
       '#value' => $this->t('Delete selected'),
       '#attributes' => ['onclick' => 'if(!confirm("Do you want to delete data?")){return false;}'],
-//      '#attributes' => [
-//        'class' => ['use-ajax', 'button', 'button--small'],
-//        'data-dialog-type' => 'modal',
-//        'data-dialog-options' => Json::encode(['width' => 400]),
-//      ],
     ];
 
     return $form;
@@ -126,36 +108,28 @@ class ArAdminList extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-//    $query = \Drupal::database();
-//    global $_id;
-//    $fid = $query
-//      ->select('ar', 'data')
-//      ->condition('id', $_id)
-//      ->fields('data', ['fid'])
-//      ->execute()->fetchAll();
-//    $fid = json_decode(json_encode($fid), TRUE);
-
     $values = $form_state->getValues()['table'];
     $deletes = array_filter($values);
 
-    $fid = \Drupal::database()->select('ar', 'data')
-      ->condition('id', $deletes)
-      ->fields('data', ['fid'])
-      ->execute()->fetchAll();
-    $fid = json_decode(json_encode($fid), TRUE);
     if ($deletes == NULL) {
       $form_state->setRedirect('ar.structure');
     }
     else {
+      $fid = \Drupal::database()->select('ar', 'data')
+        ->condition('id', $deletes, 'IN')
+        ->fields('data', ['fid'])
+        ->execute()->fetchAll();
+      $fid = json_decode(json_encode($fid), TRUE);
       foreach ($fid as $key) {
         $key = $key['fid'];
-        $querys = \Drupal::database();
-        $querys->update('file_managed')
+        $query = \Drupal::database();
+        $query->update('file_managed')
           ->condition('fid', $key, 'IN')
           ->fields(['status' => '0'])
           ->execute();
       }
 
+      $querys = \Drupal::database();
       $querys->delete('ar')
         ->condition('id', $deletes, 'IN')
         ->execute();

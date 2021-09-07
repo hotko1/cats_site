@@ -11,7 +11,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 
 /**
- * Use Class ArForm.
+ * Use Class ArEdit.
  *
  * @package Drupal\Ar\Form
  */

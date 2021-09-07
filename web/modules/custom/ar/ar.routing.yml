@@ -12,7 +12,6 @@ ar.delete_form:
     _form: '\Drupal\ar\Form\ArDelete'
   requirements:
     _permission: 'access content'
-#    _access: 'TRUE'
 
 ar.edit_form:
   path: '/ar/{id}/edit'

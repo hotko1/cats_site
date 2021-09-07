@@ -2,9 +2,6 @@
 
 namespace Drupal\ar\Form;
 
-use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Url;
