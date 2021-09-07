@@ -36,3 +36,11 @@ ar.delete_list:
     _form: '\Drupal\ar\Form\ArDeletes'
   requirements:
     _permission: 'access content'
+
+ar.edit_list:
+  path: '/admin/structure/{id}/edit'
+  defaults:
+    _title: 'EditList'
+    _form: '\Drupal\ar\Form\ArEditAdmin'
+  requirements:
+    _permission: 'access content'

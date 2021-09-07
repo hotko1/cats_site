@@ -2,7 +2,6 @@
 
 namespace Drupal\ar\Controller;
 
-//use Drupal\ar\Form\ArAdminList;
 use Drupal\Core\Controller\ControllerBase;
 
 /**

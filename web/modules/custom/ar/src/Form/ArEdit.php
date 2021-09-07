@@ -21,7 +21,7 @@ class ArEdit extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'ar_form';
+    return 'ar_form-edit';
   }
 
   /**
@@ -70,7 +70,7 @@ class ArEdit extends FormBase {
       ],
       '#ajax' => [
         'callback' => '::mailValidateCallback',
-        'event' => 'keyup',
+        'event' => 'change',
       ],
     ];
 
@@ -212,11 +212,11 @@ class ArEdit extends FormBase {
         \Drupal::database()->insert('ar')->fields($data)->execute();
       }
 
+      \Drupal::messenger()->addStatus('Successfully update');
+
+      $response->addCommand(new RedirectCommand('/ar/cats'));
     }
 
-    \Drupal::messenger()->addStatus('Successfully update');
-
-    $response->addCommand(new RedirectCommand('cats'));
     return $response;
   }
 

@@ -55,10 +55,30 @@ a {
   color: #000000;
   transform: translate(-50%, -50%);
 }
-.ui-widget-content .ui-dialog-content .ar-form .form-item-email-user .input-group {
+.ui-widget-content .ui-dialog-content .ar-form-edit .result_message, .ui-widget-content .ui-dialog-content .ar-form-edit .email-result_message, .ui-widget-content .ui-dialog-content .ar-form-edit .fid-result_message {
+  margin-bottom: 15px;
+  text-align: center;
+}
+.ui-widget-content .ui-dialog-content .ar-form-edit .result_message .valid, .ui-widget-content .ui-dialog-content .ar-form-edit .email-result_message .valid, .ui-widget-content .ui-dialog-content .ar-form-edit .fid-result_message .valid {
+  background: #f5f5f5;
+  font-size: 18px;
+  line-height: 36px;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: #20b2aa;
+}
+.ui-widget-content .ui-dialog-content .ar-form-edit .result_message .novalid, .ui-widget-content .ui-dialog-content .ar-form-edit .email-result_message .novalid, .ui-widget-content .ui-dialog-content .ar-form-edit .fid-result_message .novalid {
+  background: #ffe4b5;
+  font-size: 18px;
+  line-height: 36px;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: #ff4500;
+}
+.ui-widget-content .ui-dialog-content .ar-form-edit .form-item-email-user .input-group {
   display: block;
 }
-.ui-widget-content .ui-dialog-content .ar-form .form-item-email-user .input-group .input-group-addon {
+.ui-widget-content .ui-dialog-content .ar-form-edit .form-item-email-user .input-group .input-group-addon {
   display: none;
 }
 

@@ -64,12 +64,11 @@ class ArAdminList extends FormBase {
       $link_delete = Link::fromTextAndUrl($text_delete, $url_delete);
 
       $text_edit = t('Edit');
-      $url_edit = Url::fromRoute('ar.edit_form', ['id' => $data->id], []);
+      $url_edit = Url::fromRoute('ar.edit_list', ['id' => $data->id], []);
       $url_edit->setOptions([
         'attributes' => [
-          'class' => ['use-ajax', 'button', 'button--small'],
+          'class' => ['button', 'button--small'],
           'data-dialog-type' => 'modal',
-          'data-dialog-options' => Json::encode(['width' => 400]),
         ],
       ]);
       $link_edit = Link::fromTextAndUrl($text_edit, $url_edit);
