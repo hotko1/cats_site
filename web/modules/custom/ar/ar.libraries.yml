@@ -3,3 +3,9 @@ ar_block:
   css:
     theme:
       css/page.css: {}
+
+ar_admin:
+  version: 1.x
+  css:
+    theme:
+      css/admin-panel.css: {}

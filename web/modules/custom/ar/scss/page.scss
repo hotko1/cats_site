@@ -17,6 +17,18 @@
       }
     }
   }
+  .ui-dialog-content{
+    .ar-form{
+      .form-item-email-user{
+        .input-group{
+          display: block;
+          .input-group-addon{
+            display: none;
+          }
+        }
+      }
+    }
+  }
 }
 .main-container{
   .row{
@@ -135,63 +147,8 @@
             }
           }
         }
-        .outputs_wrapper{
-          margin-top: 40px;
-          .outputs_item{
-            margin-top: 20px;
-            padding: 25px;
-            background: #ffcc66;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .top{
-              width: 60%;
-              display: flex;
-              justify-content: space-around;
-              align-items: center;
-              //margin: 20px;
-              .top-left{
-                .names{
-                  margin: 0;
-                  font-size: 28px;
-                }
-                .emails{
-                  margin-top: 25px;
-                  margin-bottom: 0;
-                  font-size: 18px;
-                }
-                .times{
-                  margin-top: 25px;
-                  font-size: 18px;
-                }
-              }
-              .top-right{
-                .link-image{
-                  .image-cat{
-                    object-fit: cover;
-                    width: 150px;
-                    height: 150px;
-                  }
-                }
-              }
-            }
-            .bottom{
-              a{
-                display: inline-block;
-                padding: 15px;
-                width: 100px;
-                background: #990000;
-                font-weight: 600;
-                color: #ffffff;
-                text-align: center;
-                + a{
-                  margin-left: 20px;
-                }
-              }
-            }
-          }
-        }
       }
     }
   }
 }
+

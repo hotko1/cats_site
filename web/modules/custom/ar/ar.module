@@ -17,5 +17,10 @@ function ar_theme($existing, $type, $theme, $path) {
         'title' => '',
       ],
     ],
+    'ar-admin' => [
+      'variables' => [
+        'forms' => [],
+      ],
+    ],
   ];
 }

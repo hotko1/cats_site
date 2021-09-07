@@ -24,6 +24,7 @@ ar.edit_form:
 ar.structure:
   path: '/admin/structure/cats'
   defaults:
+    _title: 'Cats list'
     _controller: '\Drupal\ar\Controller\CatsListController::Content'
   requirements:
     _role: 'administrator'

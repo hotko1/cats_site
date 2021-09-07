@@ -17,7 +17,10 @@ class CatsListController extends ControllerBase {
     $simpleform = \Drupal::formBuilder()
       ->getForm('\Drupal\ar\Form\ArAdminList');
 
-    return $simpleform;
+    return [
+      '#theme' => 'ar-admin',
+      '#forms' => $simpleform,
+    ];
   }
 
 }
