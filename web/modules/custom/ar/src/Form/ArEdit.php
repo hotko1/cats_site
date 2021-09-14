@@ -70,7 +70,7 @@ class ArEdit extends FormBase {
       ],
       '#ajax' => [
         'callback' => '::mailValidateCallback',
-        'event' => 'change',
+        'event' => 'mouseout',
       ],
     ];
 
